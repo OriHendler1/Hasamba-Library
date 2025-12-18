@@ -10,33 +10,30 @@ namespace Hasamba_Library.Services
 {
     public class ReadersService
     {
-        public static ActionResult createNewReaedr(string i_fullName)
+        private readonly LibraryDBContext dbContext;
+        public ReadersService(LibraryDBContext i_dbContext)
+        {
+            dbContext = i_dbContext;
+        }
+        public ActionResult createNewReaedr(string i_fullName)
         {
             if (string.IsNullOrWhiteSpace(i_fullName))
             {
                 return new BadRequestObjectResult("Reader name is required");
             }
-            using (var context = new LibraryDBContext())
+            var reader = new Reader
             {
-                var reader = new Reader
-                {
-                    name = i_fullName,
-                };
-                
-                context.Readers.Add(reader);
-                context.SaveChanges();
-                string displayId = $"R{reader.readerId:D4}";
+                name = i_fullName,
+            };
 
-                return new CreatedResult($"/readers/{reader.readerId}", new { reader = displayId });
-
-            }
+            dbContext.Readers.Add(reader);
+            dbContext.SaveChanges();
+            string displayId = $"R{reader.readerId:D4}";
+            return new CreatedResult($"/readers/{reader.readerId}", new { reader = displayId });
         }
-        public static List<Reader> getAllReaders()
+        public List<Reader> getAllReaders()
         {
-            using (var context = new LibraryDBContext()) 
-            {
-                return context.Readers.ToList();
-            }
+            return dbContext.Readers.ToList();
         }
 
     }

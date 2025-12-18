@@ -1,10 +1,13 @@
+using Hasamba_Library.Data;
+using Hasamba_Library.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//DB context
-builder.Services.AddDbContext<DbContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Hasamba_LibraryDB")));
+builder.Services.AddDbContext<LibraryDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Hasamba_LibraryDB")));
+builder.Services.AddScoped<ReadersService>();
+builder.Services.AddScoped<BooksService>();
+builder.Services.AddScoped<LoansService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

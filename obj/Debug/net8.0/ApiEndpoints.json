@@ -166,6 +166,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Hasamba_Library.Controllers.LoansController",
+    "Method": "GetLoansByStatusList",
+    "RelativePath": "api/Loans/Status/{status}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[Hasamba_Library.Model.Loan, Hasamba-Library, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Hasamba_Library.Controllers.ReadresController",
     "Method": "Post",
     "RelativePath": "api/Readres",

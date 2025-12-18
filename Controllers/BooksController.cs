@@ -9,32 +9,34 @@ namespace Hasamba_Library.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        //create new book
+        private readonly BooksService i_booksService;
+        public BooksController(BooksService booksService)
+        {
+            i_booksService = booksService;
+        }
+
         [HttpPost]
         public ActionResult PostNewBook(string bookName, string Description, string auther,int numOfCopies)
         {
-            return Ok(BooksService.createNewBook(bookName, Description, auther, numOfCopies));
+            return Ok(i_booksService.createNewBook(bookName, Description, auther, numOfCopies));
         }
 
-        //get all books
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(BooksService.getAllBooks());
+            return Ok(i_booksService.getAllBooks());
         }
 
-        //get book by name
         [HttpGet("Name/{bookName}")]
         public ActionResult<List<Book>> GetBooksByNameList(string bookName)
         {
-            return BooksService.getBookByName(bookName);
+            return i_booksService.getBookByName(bookName);
         }
 
-        //get book by auther
         [HttpGet("Auther/{bookAuther}")]
         public ActionResult<List<Book>> GetBooksByAutherList(string bookAuther)
         {
-            return BooksService.getBookByAuther(bookAuther);
+            return i_booksService.getBookByAuther(bookAuther);
         }
 
     }

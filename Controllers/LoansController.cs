@@ -8,39 +8,40 @@ namespace Hasamba_Library.Controllers
     [ApiController]
     public class LoansController : ControllerBase
     {
-        //get all loans
+        private readonly LoansService i_LoansService;
+        public LoansController(LoansService loansService)
+        {
+            i_LoansService = loansService;
+        }
+
         [HttpGet]
         public ActionResult GetAllLoansList()
         {
-            return Ok(LoansService.GetAllLoans());
+            return Ok(i_LoansService.GetAllLoans());
         }
 
-        //gel loans by status
         [HttpGet("Status/{status}")]
-        public static ActionResult<List<Loan>> GetLoansByStatusList(Loan.LoanStatusState status)
+        public ActionResult<List<Loan>> GetLoansByStatusList(Loan.LoanStatusState status)
         {
-            return LoansService.GetLoansByStatus(status);
+            return i_LoansService.GetLoansByStatus(status);
         }
 
-        //get loans by reader
         [HttpGet("ReaderID/{readerId}")]
         public ActionResult<List<Loan>> GetAllLoansByReaderList(int readerId)
         {
-            return LoansService.GetAllLoansByReader(readerId);
+            return i_LoansService.GetAllLoansByReader(readerId);
         }
 
-        //borrow book
         [HttpGet("Borrow/")]
         public ActionResult BorrowBookUpdate(int readerId, int bookId)
         {
-            return LoansService.BorrowBook(readerId, bookId);
+            return i_LoansService.BorrowBook(readerId, bookId);
         }
 
-        //return book
         [HttpGet("Return/")]
         public ActionResult ReturnBookUpdate(int loanId)
         {
-            return LoansService.ReturnBook(loanId);
+            return i_LoansService.ReturnBook(loanId);
         }
     }
 }

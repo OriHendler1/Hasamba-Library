@@ -9,18 +9,22 @@ namespace Hasamba_Library.Controllers
     [ApiController]
     public class ReadresController : ControllerBase
     {
-        //create new reader
+        private readonly ReadersService i_ReadersService;
+        public ReadresController(ReadersService ReadersService)
+        {
+            i_ReadersService = ReadersService;
+        }
+
         [HttpPost]
         public ActionResult Post(string readerName)
         {
-            return Ok(ReadersService.createNewReaedr(readerName));
+            return Ok(i_ReadersService.createNewReaedr(readerName));
         }
 
-        //get all reader
         [HttpGet]
         public ActionResult Get() 
         {
-            return Ok(ReadersService.getAllReaders());
+            return Ok(i_ReadersService.getAllReaders());
         }
     }
 
