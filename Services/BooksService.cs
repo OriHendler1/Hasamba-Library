@@ -59,8 +59,12 @@ namespace Hasamba_Library.Services
                 return new BadRequestObjectResult("Book name is required");
             }
             
-            return dbContext.Books.Where(b => b.BookName.ToLower().Contains(i_Name.ToLower())).ToList();
-
+            var books = dbContext.Books.Where(b => b.BookName.ToLower().Contains(i_Name.ToLower())).ToList();
+            if (books.Count <= 0)
+            {
+                return new NotFoundObjectResult($"No books found for the name '{i_Name}'");
+            }
+            return books;
         }
         public ActionResult<List<Book>> getBookByAuther(string i_Auther)
         {
@@ -68,8 +72,12 @@ namespace Hasamba_Library.Services
             {
                 return new BadRequestObjectResult("Auther name is required");
             }
-            
-            return dbContext.Books.Where(b => b.Author.ToLower().Contains(i_Auther.ToLower())).ToList();
+            var books = dbContext.Books.Where(b => b.Author.ToLower().Contains(i_Auther.ToLower())).ToList();
+            if (books.Count <= 0)
+            {
+                return new NotFoundObjectResult($"No books found for the author '{i_Auther}'");
+            }
+            return books;
         }
     }
 }

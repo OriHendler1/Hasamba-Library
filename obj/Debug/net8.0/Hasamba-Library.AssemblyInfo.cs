@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hasamba-Library")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a2bf9730ea4a2d819a4cc65d71b649e0f1791d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+601f15af7ed1170132209d6271528f056e15957a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hasamba-Library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hasamba-Library")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
