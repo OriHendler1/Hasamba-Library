@@ -6,8 +6,7 @@ namespace Hasamba_Library.Model
     {
         [Key]
         [Required]
-        public int LoanId { get; set; }
-        
+        public int LoanId { get; set; } 
         [Required]
         public int ReaderId { get; set; }
         

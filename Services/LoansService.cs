@@ -58,6 +58,24 @@ namespace Hasamba_Library.Services
 
              return new OkObjectResult(loans);
         }
+        public ActionResult GetBorrowByName(string i_name)
+        {
+            var reader = dbContext.Readers.FirstOrDefault(r => r.name == i_name);
+            if (reader == null)
+            {
+                return new NotFoundObjectResult("Reader not found");
+            }
+            var readerLoan = dbContext.Loans.Where(l => l.ReaderId == reader.readerId).ToList();
+            if (readerLoan.Count == 0)
+            {
+                return new NotFoundObjectResult("No loans found for this reader");
+            }
+            var readerLoanBorrow = dbContext.Loans.Where(l => l.ReaderId == reader.readerId && l.LoanStatus == Loan.LoanStatusState.Borrowed).Count();
+            var readerLoanReturned = dbContext.Loans.Where(l => l.ReaderId == reader.readerId && l.LoanStatus == Loan.LoanStatusState.Returned).Count();
+            string res = string.Format("{0} borrowd {1} and return {2} books", i_name, readerLoanBorrow, readerLoanReturned);
+
+            return new OkObjectResult(res);
+        }
         public ActionResult BorrowBook(int i_readerId, int i_bookId) 
         {
             if (i_readerId < 0 || i_bookId < 0)

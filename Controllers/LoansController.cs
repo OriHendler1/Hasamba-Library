@@ -32,6 +32,12 @@ namespace Hasamba_Library.Controllers
             return i_LoansService.GetAllLoansByReader(readerId);
         }
 
+        [HttpGet("name/{name}")]
+        public ActionResult<List<Loan>> GetBorrowByNameList(string name)
+        {
+            return i_LoansService.GetBorrowByName(name);
+        }
+
         [HttpGet("Borrow/")]
         public ActionResult BorrowBookUpdate(int readerId, int bookId)
         {
